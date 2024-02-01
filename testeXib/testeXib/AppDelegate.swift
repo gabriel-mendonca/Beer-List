@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  BeerList
+//  testeXib
 //
-//  Created by Gabriel on 25/01/24.
+//  Created by Elaine Maria on 31/01/24.
 //
 
 import UIKit
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "BeerList")
+        let container = NSPersistentContainer(name: "testeXib")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
