@@ -2,25 +2,35 @@
 //  ListBeerCoordinator.swift
 //  BeerList
 //
-//  Created by Elaine Maria on 25/01/24.
+//  Created by Gabriel on 25/01/24.
 //
 
 import UIKit
 
 class ListBeerCoordinator: Coordinator {
     var view: ListBeerTableViewController?
-    var navigation: UINavigationController?
+    var navigation: NavigationController?
     var presentationType: PresentationType?
     
-    func start() -> ListBeerTableViewController {
+    var detailsBeerCoordinator: DetailsBeerCoordinator!
+    
+    init() {
         let viewModel = ListBeerViewModel()
-        view = ListBeerTableViewController()
-        return view!
+        viewModel.coordinatorDelegate = self
+        view = ListBeerTableViewController(viewModel: viewModel)
     }
     
     func stop() {
-        
+        view = nil
+        presentationType = nil
+        navigation = nil
     }
-    
-    
+}
+
+extension ListBeerCoordinator: ListBeerViewModelCoordinatorDelegate {
+    func goToDetailsBeer(id: Int, _ viewModel: ListBeerViewModel) {
+        guard let navigation = navigation else { return }
+        detailsBeerCoordinator = DetailsBeerCoordinator(id: id)
+        detailsBeerCoordinator.start(usingPresentation: .push(navigationController: navigation), animated: true)
+    }
 }
